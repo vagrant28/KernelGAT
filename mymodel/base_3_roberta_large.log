@@ -1,0 +1,459 @@
+RobertaConfig {
+  "_name_or_path": "/root/autodl-tmp/KernelGAT/hg_models/roberta-large",
+  "architectures": [
+    "RobertaForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 1024,
+  "initializer_range": 0.02,
+  "intermediate_size": 4096,
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 24,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "transformers_version": "4.38.2",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+Eval chosen precion=0.5072594501718213  recall=0.5897128589263421  f1=0.5453873686641265
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.73      0.90      0.81      6666
+        REFUTES       0.84      0.55      0.66      6666
+NOT ENOUGH INFO       0.62      0.68      0.65      6666
+
+       accuracy                           0.71     19998
+      macro avg       0.73      0.71      0.71     19998
+   weighted avg       0.73      0.71      0.71     19998
+
+Eval veri confusion mat:
+ [[6017   93  556]
+ [ 726 3679 2261]
+ [1515  633 4518]]
+Eval chosen precion=0.44386602494843336  recall=0.6770037453183521  f1=0.5361888941623161
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.82      0.88      0.84      6666
+        REFUTES       0.86      0.61      0.72      6666
+NOT ENOUGH INFO       0.64      0.77      0.70      6666
+
+       accuracy                           0.76     19998
+      macro avg       0.77      0.76      0.75     19998
+   weighted avg       0.77      0.76      0.75     19998
+
+Eval veri confusion mat:
+ [[5841  145  680]
+ [ 367 4099 2200]
+ [ 955  549 5162]]
+Eval chosen precion=0.5428667677278086  recall=0.6437952559300874  f1=0.5890389052612341
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.88      0.76      0.82      6666
+        REFUTES       0.86      0.63      0.73      6666
+NOT ENOUGH INFO       0.60      0.85      0.70      6666
+
+       accuracy                           0.75     19998
+      macro avg       0.78      0.75      0.75     19998
+   weighted avg       0.78      0.75      0.75     19998
+
+Eval veri confusion mat:
+ [[5099  135 1432]
+ [ 185 4184 2297]
+ [ 491  529 5646]]
+Eval chosen precion=0.48842364532019705  recall=0.6931835205992509  f1=0.5730622355248219
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.85      0.87      0.86      6666
+        REFUTES       0.89      0.60      0.72      6666
+NOT ENOUGH INFO       0.64      0.83      0.72      6666
+
+       accuracy                           0.77     19998
+      macro avg       0.79      0.77      0.77     19998
+   weighted avg       0.79      0.77      0.77     19998
+
+Eval veri confusion mat:
+ [[5778   99  789]
+ [ 300 4014 2352]
+ [ 721  379 5566]]
+Eval chosen precion=0.4127475964322947  recall=0.7117602996254682  f1=0.522499404292758
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.80      0.87      0.83      6666
+        REFUTES       0.82      0.64      0.72      6666
+NOT ENOUGH INFO       0.67      0.76      0.71      6666
+
+       accuracy                           0.76     19998
+      macro avg       0.76      0.76      0.75     19998
+   weighted avg       0.76      0.76      0.75     19998
+
+Eval veri confusion mat:
+ [[5813  262  591]
+ [ 524 4257 1885]
+ [ 961  659 5046]]
+Eval chosen precion=0.3998950406717397  recall=0.6088389513108614  f1=0.482727218735771
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.80      0.69      0.74      6666
+        REFUTES       0.81      0.64      0.72      6666
+NOT ENOUGH INFO       0.59      0.79      0.67      6666
+
+       accuracy                           0.71     19998
+      macro avg       0.73      0.71      0.71     19998
+   weighted avg       0.73      0.71      0.71     19998
+
+Eval veri confusion mat:
+ [[4582  270 1814]
+ [ 491 4279 1896]
+ [ 658  733 5275]]
+Eval chosen precion=0.41640565478709896  recall=0.7369288389513109  f1=0.5321289485071398
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.79      0.91      0.85      6666
+        REFUTES       0.88      0.63      0.73      6666
+NOT ENOUGH INFO       0.67      0.76      0.71      6666
+
+       accuracy                           0.77     19998
+      macro avg       0.78      0.77      0.77     19998
+   weighted avg       0.78      0.77      0.77     19998
+
+Eval veri confusion mat:
+ [[6091  102  473]
+ [ 481 4200 1985]
+ [1118  476 5072]]
+Eval chosen precion=0.4769805728277329  recall=0.7393258426966293  f1=0.5798605671314429
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.79      0.89      0.84      6666
+        REFUTES       0.86      0.68      0.76      6666
+NOT ENOUGH INFO       0.69      0.75      0.72      6666
+
+       accuracy                           0.77     19998
+      macro avg       0.78      0.77      0.77     19998
+   weighted avg       0.78      0.77      0.77     19998
+
+Eval veri confusion mat:
+ [[5945  115  606]
+ [ 465 4556 1645]
+ [1089  607 4970]]
+Eval chosen precion=0.4592460964810068  recall=0.7872659176029962  f1=0.5800967747870402
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.84      0.90      0.87      6666
+        REFUTES       0.80      0.82      0.81      6666
+NOT ENOUGH INFO       0.77      0.70      0.73      6666
+
+       accuracy                           0.81     19998
+      macro avg       0.80      0.81      0.80     19998
+   weighted avg       0.80      0.81      0.80     19998
+
+Eval veri confusion mat:
+ [[6025  183  458]
+ [ 259 5453  954]
+ [ 887 1141 4638]]
+Eval chosen precion=0.4553310650085815  recall=0.7551560549313359  f1=0.5681118040423774
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.83      0.87      0.85      6666
+        REFUTES       0.84      0.70      0.76      6666
+NOT ENOUGH INFO       0.69      0.77      0.73      6666
+
+       accuracy                           0.78     19998
+      macro avg       0.79      0.78      0.78     19998
+   weighted avg       0.79      0.78      0.78     19998
+
+Eval veri confusion mat:
+ [[5829  191  646]
+ [ 379 4668 1619]
+ [ 841  679 5146]]
+Eval chosen precion=0.3704098170872887  recall=0.7989013732833957  f1=0.5061456932690026
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.84      0.90      0.87      6666
+        REFUTES       0.83      0.78      0.81      6666
+NOT ENOUGH INFO       0.75      0.74      0.74      6666
+
+       accuracy                           0.81     19998
+      macro avg       0.81      0.81      0.81     19998
+   weighted avg       0.81      0.81      0.81     19998
+
+Eval veri confusion mat:
+ [[6007  168  491]
+ [ 268 5214 1184]
+ [ 838  892 4936]]
+Eval chosen precion=0.4031015874679101  recall=0.7684394506866417  f1=0.5288063368786405
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.86      0.89      0.87      6666
+        REFUTES       0.90      0.65      0.75      6666
+NOT ENOUGH INFO       0.67      0.83      0.74      6666
+
+       accuracy                           0.79     19998
+      macro avg       0.81      0.79      0.79     19998
+   weighted avg       0.81      0.79      0.79     19998
+
+Eval veri confusion mat:
+ [[5961   98  607]
+ [ 253 4301 2112]
+ [ 756  375 5535]]
+Eval chosen precion=0.41140789071261086  recall=0.8060923845193508  f1=0.544776497190395
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.82      0.91      0.87      6666
+        REFUTES       0.82      0.81      0.81      6666
+NOT ENOUGH INFO       0.77      0.70      0.74      6666
+
+       accuracy                           0.81     19998
+      macro avg       0.81      0.81      0.80     19998
+   weighted avg       0.81      0.81      0.80     19998
+
+Eval veri confusion mat:
+ [[6090  191  385]
+ [ 315 5373  978]
+ [ 985 1010 4671]]
+Eval chosen precion=0.39635868996547036  recall=0.7566541822721597  f1=0.5202135512334128
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.82      0.86      0.84      6666
+        REFUTES       0.84      0.70      0.76      6666
+NOT ENOUGH INFO       0.70      0.77      0.73      6666
+
+       accuracy                           0.78     19998
+      macro avg       0.78      0.78      0.78     19998
+   weighted avg       0.78      0.78      0.78     19998
+
+Eval veri confusion mat:
+ [[5759  154  753]
+ [ 511 4685 1470]
+ [ 783  746 5137]]
+Eval chosen precion=0.41031425841384433  recall=0.7719850187265918  f1=0.5358312680889412
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.80      0.91      0.85      6666
+        REFUTES       0.88      0.66      0.76      6666
+NOT ENOUGH INFO       0.69      0.77      0.73      6666
+
+       accuracy                           0.78     19998
+      macro avg       0.79      0.78      0.78     19998
+   weighted avg       0.79      0.78      0.78     19998
+
+Eval veri confusion mat:
+ [[6055  115  496]
+ [ 461 4427 1778]
+ [1033  501 5132]]
+Eval chosen precion=0.42651443922095367  recall=0.7928589263420724  f1=0.5546550218340611
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.83      0.91      0.87      6666
+        REFUTES       0.82      0.78      0.80      6666
+NOT ENOUGH INFO       0.75      0.72      0.74      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.80      0.80      0.80     19998
+   weighted avg       0.80      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6063  149  454]
+ [ 321 5214 1131]
+ [ 889  982 4795]]
+Eval chosen precion=0.4810564719822882  recall=0.7703870162297128  f1=0.592275501977195
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.82      0.92      0.87      6666
+        REFUTES       0.85      0.74      0.79      6666
+NOT ENOUGH INFO       0.74      0.75      0.74      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.80      0.80      0.80     19998
+   weighted avg       0.80      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6138  128  400]
+ [ 331 4946 1389]
+ [ 972  716 4978]]
+Eval chosen precion=0.4351831661578718  recall=0.7973033707865168  f1=0.5630455098478303
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.84      0.92      0.88      6666
+        REFUTES       0.86      0.73      0.79      6666
+NOT ENOUGH INFO       0.73      0.76      0.75      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.81      0.80      0.80     19998
+   weighted avg       0.81      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6107  136  423]
+ [ 285 4895 1486]
+ [ 885  689 5092]]
+Eval chosen precion=0.40105734251092673  recall=0.7652434456928839  f1=0.5262904832228595
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.86      0.89      0.87      6666
+        REFUTES       0.87      0.71      0.78      6666
+NOT ENOUGH INFO       0.70      0.80      0.75      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.81      0.80      0.80     19998
+   weighted avg       0.81      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[5950  121  595]
+ [ 265 4712 1689]
+ [ 728  572 5366]]
+Eval chosen precion=0.4629757370362595  recall=0.7708863920099875  f1=0.5785114675460951
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.85      0.90      0.87      6666
+        REFUTES       0.84      0.76      0.80      6666
+NOT ENOUGH INFO       0.74      0.76      0.75      6666
+
+       accuracy                           0.81     19998
+      macro avg       0.81      0.81      0.81     19998
+   weighted avg       0.81      0.81      0.81     19998
+
+Eval veri confusion mat:
+ [[6025  151  490]
+ [ 255 5088 1323]
+ [ 838  792 5036]]
+Eval chosen precion=0.4609264913104744  recall=0.7840699126092384  f1=0.5805616668823605
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.84      0.91      0.87      6666
+        REFUTES       0.86      0.73      0.79      6666
+NOT ENOUGH INFO       0.72      0.76      0.74      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.81      0.80      0.80     19998
+   weighted avg       0.81      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6037  112  517]
+ [ 293 4899 1474]
+ [ 897  671 5098]]
+Eval chosen precion=0.38536315100231694  recall=0.7641448189762796  f1=0.5123466090770595
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.85      0.90      0.87      6666
+        REFUTES       0.86      0.72      0.79      6666
+NOT ENOUGH INFO       0.71      0.78      0.75      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.81      0.80      0.80     19998
+   weighted avg       0.81      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6025  116  525]
+ [ 295 4803 1568]
+ [ 805  648 5213]]
+Eval chosen precion=0.42626163645271925  recall=0.7820224719101123  f1=0.5517678769621056
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.84      0.91      0.87      6666
+        REFUTES       0.85      0.74      0.80      6666
+NOT ENOUGH INFO       0.73      0.76      0.74      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.81      0.80      0.80     19998
+   weighted avg       0.81      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6088  121  457]
+ [ 288 4959 1419]
+ [ 894  725 5047]]
+Eval chosen precion=0.40465091499960043  recall=0.7586017478152309  f1=0.5277768127019421
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.85      0.90      0.87      6666
+        REFUTES       0.87      0.70      0.78      6666
+NOT ENOUGH INFO       0.70      0.79      0.74      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.81      0.80      0.80     19998
+   weighted avg       0.81      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[6009  120  537]
+ [ 278 4696 1692]
+ [ 820  585 5261]]
+Eval chosen precion=0.44049385481116493  recall=0.7857178526841448  f1=0.5645091848450058
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.84      0.91      0.87      6666
+        REFUTES       0.84      0.77      0.80      6666
+NOT ENOUGH INFO       0.74      0.75      0.74      6666
+
+       accuracy                           0.81     19998
+      macro avg       0.81      0.81      0.81     19998
+   weighted avg       0.81      0.81      0.81     19998
+
+Eval veri confusion mat:
+ [[6060  133  473]
+ [ 293 5126 1247]
+ [ 865  830 4971]]
+Eval chosen precion=0.4237994073908425  recall=0.757103620474407  f1=0.5434147565368554
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.85      0.89      0.87      6666
+        REFUTES       0.85      0.72      0.78      6666
+NOT ENOUGH INFO       0.70      0.78      0.74      6666
+
+       accuracy                           0.80     19998
+      macro avg       0.80      0.80      0.80     19998
+   weighted avg       0.80      0.80      0.80     19998
+
+Eval veri confusion mat:
+ [[5941  122  603]
+ [ 266 4786 1614]
+ [ 773  716 5177]]
+Eval chosen precion=0.4487417372144265  recall=0.7729338327091136  f1=0.5678228809362217
+Eval veri class report:
+                  precision    recall  f1-score   support
+
+       SUPPORTS       0.85      0.90      0.87      6666
+        REFUTES       0.85      0.75      0.80      6666
+NOT ENOUGH INFO       0.73      0.77      0.75      6666
+
+       accuracy                           0.81     19998
+      macro avg       0.81      0.81      0.81     19998
+   weighted avg       0.81      0.81      0.81     19998
+
+Eval veri confusion mat:
+ [[5997  130  539]
+ [ 271 5012 1383]
+ [ 789  764 5113]]

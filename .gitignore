@@ -1,0 +1,11 @@
+/data/
+/packages/
+/KernelGAT/
+/fever-scorer/
+/logs/
+/tagme_train/
+/bert_base/
+/checkpoint/
+/info/
+/hg_models/
+/KernelGAT_roberta_large/

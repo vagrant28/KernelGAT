@@ -100,14 +100,17 @@ class DataLoader(object):
         self.inputs = inputs
         self.labels = labels
         self.test = test
+        self._n_batch = (len(self.examples) + self.batch_size - 1) // self.batch_size
 
-        self.total_num = len(examples)
+        self.total_num = len(self.examples)
         if self.test:
             self.total_step = self.total_num / batch_size #np.ceil(self.total_num * 1.0 / batch_size)
         else:
             self.total_step = self.total_num / batch_size
             self.shuffle()
         self.step = 0
+
+        print(f"###: dataset_num = {len(self.examples)}")
 
 
 
@@ -124,6 +127,8 @@ class DataLoader(object):
                 label = self.label_map[instance['label']]
                 evi_list = evi_list[:self.evi_num]
                 examples.append([evi_list, label])
+                # if len(evi_list) != 5:
+                #     print(len(evi_list), evi_list)
         return examples
 
 
@@ -160,13 +165,18 @@ class DataLoader(object):
 
     def next(self):
         ''' Get the next batch '''
+        # print(f"### self.step = {self.step}")
 
         if self.step < self.total_step:
             inputs = self.inputs[self.step * self.batch_size : (self.step+1)*self.batch_size]
+            # print("###:", [len(item) for item in inputs])
             labels = self.labels[self.step * self.batch_size : (self.step+1)*self.batch_size]
             inp_padding_inputs, msk_padding_inputs, seg_padding_inputs = [], [], []
             for step in range(len(inputs)):
                 inp, msk, seg = tok2int_list(inputs[step], self.tokenizer, self.max_len, self.evi_num)
+                if len(inputs[step]) != 5:
+                    print("&&&:", inputs[step])
+                    print("***:", inp )
                 inp_padding_inputs += inp
                 msk_padding_inputs += msk
                 seg_padding_inputs += seg
@@ -217,6 +227,8 @@ class DataLoaderTest(object):
         self.total_num = len(examples)
         self.total_step = np.ceil(self.total_num * 1.0 / batch_size)
         self.step = 0
+        # self._n_batch = (len(self.examples) + self.batch_size - 1) // self.batch_size
+        self._n_batch = self.total_step
 
     def process_sent(self, sentence):
         sentence = re.sub(" \-LSB\-.*?\-RSB\-", "", sentence)
@@ -244,6 +256,8 @@ class DataLoaderTest(object):
                 instance = json.loads(line.strip())
                 claim = instance['claim']
                 evi_list = list()
+                if len(instance['evidence']) != 5:
+                    print(id, instance['evidence'])
                 for evidence in instance['evidence']:
                     evi_list.append([self.process_sent(claim), self.process_wiki_title(evidence[0]),
                                      self.process_sent(evidence[2])])
@@ -267,6 +281,7 @@ class DataLoaderTest(object):
 
     def next(self):
         ''' Get the next batch '''
+        print(f"### self.step = {self.step}")
 
         if self.step < self.total_step:
             inputs = self.inputs[self.step * self.batch_size : (self.step+1)*self.batch_size]

@@ -1,0 +1,5 @@
+output_file:  /root/autodl-tmp/KernelGAT/data/tagme_bert_dev.jsonl
+error annotation about:  206174 Palo Alto, California is located outside of the United States.
+error annotation about:  116398 Moonlight was not filmed in Miami, Florida.
+error annotation about:  72961 Dev Patel starred in Star Wars.
+finish !!

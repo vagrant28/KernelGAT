@@ -78,16 +78,21 @@ class inference_model(nn.Module):
         own_mask = own_mask.repeat(1, self.evi_num, 1)
         own_input = own_input.repeat(1, self.evi_num, 1)
 
+        # all claim-evidence pair embeddings
         hiddens_norm = F.normalize(inputs_hiddens, p=2, dim=-1)
+        # repeat index-th claim-evidence pair embedding
         own_norm = F.normalize(own_hidden, p=2, dim=-1)
 
+        # Token Level Attention
         att_score = self.get_intersect_matrix_att(hiddens_norm.view(-1, self.max_len, self.bert_hidden_dim), own_norm.view(-1, self.max_len, self.bert_hidden_dim),
                                                   mask_evidence.view(-1, self.max_len), own_mask.view(-1, self.max_len))
         att_score = att_score.view(-1, self.evi_num, self.max_len, 1)
+        denoise_inputs = torch.sum(att_score * inputs_hiddens, 2)
         #if index == 1:
         #    for i in range(self.evi_num):
         #print (att_score.view(-1, self.evi_num, self.max_len)[0, 1, :])
-        denoise_inputs = torch.sum(att_score * inputs_hiddens, 2)
+
+        # Sentence Level Attention
         weight_inp = torch.cat([own_input, inputs], -1)
         weight_inp = self.proj_gat(weight_inp)
         weight_inp = F.softmax(weight_inp, dim=1)
@@ -122,11 +127,14 @@ class inference_model(nn.Module):
         return log_pooling_sum
 
     def forward(self, inputs):
+        # 3.2 Initial Node Representations
         inp_tensor, msk_tensor, seg_tensor = inputs
         msk_tensor = msk_tensor.view(-1, self.max_len)
         inp_tensor = inp_tensor.view(-1, self.max_len)
         seg_tensor = seg_tensor.view(-1, self.max_len)
         inputs_hiddens, inputs = self.pred_model(inp_tensor, msk_tensor, seg_tensor)
+
+        # 3.4 Node Kernel for Evidence Aggregation
         mask_text = msk_tensor.view(-1, self.max_len).float()
         mask_text[:, 0] = 0.0
         mask_claim = (1 - seg_tensor.float()) * mask_text
@@ -136,6 +144,8 @@ class inference_model(nn.Module):
         log_pooling_sum = self.get_intersect_matrix(inputs_hiddens_norm, inputs_hiddens_norm, mask_claim, mask_evidence)
         log_pooling_sum = log_pooling_sum.view([-1, self.evi_num, 1])
         select_prob = F.softmax(log_pooling_sum, dim=1)
+
+        # 3.3 Edge Kernel for Evidence Propagation
         inputs = inputs.view([-1, self.evi_num, self.bert_hidden_dim])
         inputs_hiddens = inputs_hiddens.view([-1, self.evi_num, self.max_len, self.bert_hidden_dim])
         inputs_att_de = []
@@ -146,8 +156,10 @@ class inference_model(nn.Module):
         inputs_att_de = torch.cat(inputs_att_de, dim=1)
         inputs_att_de = inputs_att_de.view([-1, self.evi_num, self.bert_hidden_dim])
         inputs_att = torch.cat([inputs_att, inputs_att_de], -1)
+        # Sentence Level Claim Label Prediction
         inference_feature = self.proj_inference_de(inputs_att)
         class_prob = F.softmax(inference_feature, dim=2)
+        # Joint Label Prediction
         prob = torch.sum(select_prob * class_prob, 1)
         prob = torch.log(prob)
         return prob

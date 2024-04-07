@@ -15,6 +15,8 @@ from data_loader import DataLoader
 from bert_model import BertForSequenceEncoder
 from torch.nn import NLLLoss
 import logging
+from datetime import date
+from torch.utils.tensorboard import SummaryWriter
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +37,7 @@ def correct_prediction(output, labels):
 def eval_model(model, validset_reader):
     model.eval()
     correct_pred = 0.0
-    for index, data in enumerate(validset_reader):
+    for data in tqdm(validset_reader, total=len(validset_reader)):
         inputs, lab_tensor = data
         prob = model(inputs)
         correct_pred += correct_prediction(prob, lab_tensor)
@@ -67,7 +69,7 @@ def train_model(model, ori_model, args, trainset_reader, validset_reader):
     for epoch in range(int(args.num_train_epochs)):
         model.train()
         optimizer.zero_grad()
-        for index, data in enumerate(trainset_reader):
+        for data in tqdm(trainset_reader, total=len(trainset_reader)):
             inputs, lab_tensor = data
             prob = model(inputs)
             loss = F.nll_loss(prob, lab_tensor)
@@ -79,12 +81,15 @@ def train_model(model, ori_model, args, trainset_reader, validset_reader):
             if global_step % args.gradient_accumulation_steps == 0:
                 optimizer.step()
                 optimizer.zero_grad()
-                logger.info('Epoch: {0}, Step: {1}, Loss: {2}'.format(epoch, global_step, (running_loss / global_step)))
+                # logger.info('Epoch: {0}, Step: {1}, Loss: {2}'.format(epoch, global_step, (running_loss / global_step)))
+                tb_logger.add_scalar('train_loss', loss.item(), global_step)
+                tb_logger.add_scalar('smoothed_train_loss', running_loss / global_step, global_step)
             if global_step % (args.eval_step * args.gradient_accumulation_steps) == 0:
                 logger.info('Start eval!')
                 with torch.no_grad():
                     dev_accuracy = eval_model(model, validset_reader)
-                    logger.info('Dev total acc: {0}'.format(dev_accuracy))
+                    # logger.info('Dev total acc: {0}'.format(dev_accuracy))
+                    tb_logger.add_scalar('eval_acc', dev_accuracy, global_step)
                     if dev_accuracy > best_accuracy:
                         best_accuracy = dev_accuracy
 
@@ -131,10 +136,23 @@ if __name__ == "__main__":
                         type=int,
                         default=8,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
+    parser.add_argument("--seed", type=int, default=16)
+    parser.add_argument("--prefix", type=str, default="test")
     args = parser.parse_args()
 
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    if torch.cuda.device_count() > 0:
+        torch.cuda.manual_seed_all(args.seed)
+
+    date_curr = date.today().strftime("%m-%d-%Y")
+    model_name = f"{args.prefix}-seed{args.seed}-epoch{args.num_train_epochs}-bsz{args.train_batch_size}-lr{args.learning_rate}"
+    args.outdir = os.path.join(args.outdir, date_curr, model_name)
+    tb_logger = SummaryWriter(os.path.join(args.outdir.replace("logs","tflogs")))
+
     if not os.path.exists(args.outdir):
-        os.mkdir(args.outdir)
+        os.makedirs(args.outdir, exist_ok=True)
     args.cuda = not args.no_cuda and torch.cuda.is_available()
     handlers = [logging.FileHandler(os.path.abspath(args.outdir) + '/train_log.txt'), logging.StreamHandler()]
     logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', level=logging.DEBUG,
@@ -162,3 +180,4 @@ if __name__ == "__main__":
     model = nn.DataParallel(ori_model)
     model = model.cuda()
     train_model(model, ori_model, args, trainset_reader, validset_reader)
+    logger.info('Finish training!')

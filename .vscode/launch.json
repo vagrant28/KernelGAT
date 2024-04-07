@@ -1,0 +1,94 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+        },
+        {
+            "name": "train_kgat",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/root/autodl-tmp/KernelGAT/kgat/train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "/root/autodl-tmp/KernelGAT/kgat",
+            "args": [
+                "--outdir", "../logs/kgat",
+                "--train_path", "../data/bert_dev.json",
+                "--valid_path", "../data/bert_dev.json",
+                "--bert_pretrain", "../bert_base",
+                // "--postpretrain", "../pretrain/save_model/model.best.pt",
+                "--train_batch_size", "16",
+                "--valid_batch_size", "16",
+                "--gradient_accumulation_steps", "1",
+                "--eval_step", "2000",
+                "--prefix", "DEBUG",
+                
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                // "PYTHONPATH": "/root/autodl-tmp/KernelGAT/kgat",
+            }
+        },
+        {
+            "name": "train_mymodel",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/root/autodl-tmp/KernelGAT/mymodel/train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "/root/autodl-tmp/KernelGAT/mymodel",
+            "args": [
+                "--outdir", "../logs/gumbel",
+                "--train_path", "../data/gumbel_train.jsonl",
+                "--valid_path", "../data/gumbel_dev.jsonl",
+                "--train_batch_size", "10",
+                "--valid_batch_size", "10",
+                "--prefix", "DEBUG",
+                // "--encoder_name", "/root/autodl-tmp/KernelGAT/hg_models/bert-base-uncased",
+                "--encoder_name", "/root/autodl-tmp/KernelGAT/hg_models/bigbird-roberta-base",
+                // "--fp16",
+                "--eval_step", "1",
+                "--num_train_epochs", "8",
+                "--seed", "666"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTHONPATH": "/root/autodl-tmp/KernelGAT/mymodel",
+            },
+        },
+        {
+            "name": "test_mymodel",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/root/autodl-tmp/KernelGAT/mymodel/test.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "/root/autodl-tmp/KernelGAT/mymodel",
+            "args": [
+                "--outdir", "../logs/gumbel",
+                "--test_path", "../data/gumbel_test.jsonl",
+                "--test_batch_size", "200",
+                "--prefix", "DEBUG_predict_test",
+                // "--encoder_name", "/root/autodl-tmp/KernelGAT/hg_models/bert-base-uncased",
+                // "--encoder_name", "/root/autodl-tmp/KernelGAT/hg_models/bigbird-roberta-base",
+                "--encoder_name", "/root/autodl-tmp/KernelGAT/hg_models/roberta-large",
+                "--seed", "42",
+                "--checkpoint", "/root/autodl-tmp/KernelGAT/logs/gumbel/04-03-2024/official_basemodel_3_roberta_large-seed42-epoch10.0-bsz4-lr2e-05/checkpoint_best_10394.pt"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTHONPATH": "/root/autodl-tmp/KernelGAT/mymodel",
+            },
+        }
+
+    ]
+}
